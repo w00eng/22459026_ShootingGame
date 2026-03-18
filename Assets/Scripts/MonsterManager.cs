@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MonsterManager : MonoBehaviour
+{
+    public GameObject prefabsMonster;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GameObject monster = Instantiate(prefabsMonster);
+        monster.transform.position = transform.position;
+    }
+}
