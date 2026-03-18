@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMoveController : MonoBehaviour
 {
-    [SerializeField] public float spd = 5f;
+    public float spd = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,7 @@ public class PlayerMoveController : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         
-        Vector3 direct = new Vector3(h, 0, v);
+        Vector3 direct = new Vector3(h, v, 0);
 
         transform.position = transform.position + direct * spd * Time.deltaTime;
     }
