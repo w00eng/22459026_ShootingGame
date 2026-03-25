@@ -10,8 +10,5 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.up * bulletSpd * Time.deltaTime);
-
-        if (transform.position.y > 10)
-            Destroy(gameObject);
     }
 }
