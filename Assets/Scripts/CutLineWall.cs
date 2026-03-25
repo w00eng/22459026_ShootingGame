@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class CutLineWall : MonoBehaviour
 {
+    public GameObject targetObject;
+    string targetTag;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        targetTag = targetObject.tag;
     }
 
     // Update is called once per frame
@@ -18,6 +21,9 @@ public class CutLineWall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
+        if (other.gameObject.tag == targetTag)
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
