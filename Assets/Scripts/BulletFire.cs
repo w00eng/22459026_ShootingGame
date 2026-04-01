@@ -5,7 +5,10 @@ using UnityEngine;
 public class BulletFire : MonoBehaviour
 {
     public GameObject bulletObject;
-    public GameObject bulletFireObject;
+    public GameObject bulletFireLeftObject;
+    public GameObject bulletFireRightObject;
+
+    bool leftFire = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,8 +24,18 @@ public class BulletFire : MonoBehaviour
 
         if (isFire)
         {
-            GameObject bullet = Instantiate(bulletObject);
-            bullet.transform.position = bulletFireObject.transform.position;
+            if (leftFire)
+            {
+                GameObject bullet = Instantiate(bulletObject);
+                bullet.transform.position = bulletFireLeftObject.transform.position;
+                leftFire = false;
+            }
+            else
+            {
+                GameObject bullet = Instantiate(bulletObject);
+                bullet.transform.position = bulletFireRightObject.transform.position;
+                leftFire = true;
+            }
         }
     }
 }

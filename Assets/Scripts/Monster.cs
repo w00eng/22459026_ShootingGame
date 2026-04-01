@@ -7,6 +7,8 @@ public class Monster: MonoBehaviour
     public float monsterSpd = 1f;
     Vector3 direct = Vector3.down;
 
+    public GameObject prefabsExplosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +31,8 @@ public class Monster: MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
+            GameObject explosionObj = Instantiate(prefabsExplosion, transform.position, Quaternion.identity);
+
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
