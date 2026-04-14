@@ -26,14 +26,15 @@ public class BulletFire : MonoBehaviour
         {
             if (leftFire)
             {
-                GameObject bullet = Instantiate(bulletObject);
-                bullet.transform.position = bulletFireLeftObject.transform.position;
+                GameObject bullet = Instantiate(bulletObject, bulletFireLeftObject.transform.position, Quaternion.identity);
+                bullet.GetComponent<BulletController>().isLeftFire = true;
                 leftFire = false;
             }
             else
             {
-                GameObject bullet = Instantiate(bulletObject);
+                GameObject bullet = Instantiate(bulletObject, bulletFireRightObject.transform.position, Quaternion.identity);
                 bullet.transform.position = bulletFireRightObject.transform.position;
+                bullet.GetComponent<BulletController>().isLeftFire = false;
                 leftFire = true;
             }
         }

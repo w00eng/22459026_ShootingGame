@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Monster: MonoBehaviour
 {
-    public float monsterSpd = 1f;
+    public float monsterSpd = 3f;
     Vector3 direct = Vector3.down;
 
     public GameObject prefabsExplosion;
