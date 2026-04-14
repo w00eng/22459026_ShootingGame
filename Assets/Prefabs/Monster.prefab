@@ -46,7 +46,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.75, y: 0.68, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &5453239828519031249
 Rigidbody:
@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdae6ce993b8ecf42988192f06de5b4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterSpd: 2
+  monsterSpd: 3
   prefabsExplosion: {fileID: 4914716930404006884, guid: aed12c224fbc8704d8eaa07a52e88f44, type: 3}
 --- !u!1001 &8788362861125834081
 PrefabInstance:
