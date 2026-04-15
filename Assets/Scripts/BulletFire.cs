@@ -4,37 +4,52 @@ using UnityEngine;
 
 public class BulletFire : MonoBehaviour
 {
-    public GameObject bulletObject;
+    public GameObject straightBulletObject;
+    public GameObject curveBulletObject;
     public GameObject bulletFireLeftObject;
     public GameObject bulletFireRightObject;
 
-    bool leftFire = true;
+    private bool isStraightFire;
+    private bool isCurveFire;
+    private bool leftFire = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        // Fire1 Button: LeftCtrl
-        bool isFire = Input.GetButtonDown("Fire1");
+        if (!PlayManager.isGameOver)
+        {
+            isStraightFire = Input.GetButtonDown("Fire1");
+            isCurveFire = Input.GetButtonDown("Fire2");
+        }
 
-        if (isFire)
+        if (isStraightFire)
         {
             if (leftFire)
             {
-                GameObject bullet = Instantiate(bulletObject, bulletFireLeftObject.transform.position, Quaternion.identity);
-                bullet.GetComponent<BulletController>().isLeftFire = true;
+                GameObject bullet = Instantiate(straightBulletObject);
+                bullet.transform.position = bulletFireLeftObject.transform.position;
                 leftFire = false;
             }
             else
             {
-                GameObject bullet = Instantiate(bulletObject, bulletFireRightObject.transform.position, Quaternion.identity);
+                GameObject bullet = Instantiate(straightBulletObject);
                 bullet.transform.position = bulletFireRightObject.transform.position;
-                bullet.GetComponent<BulletController>().isLeftFire = false;
+                leftFire = true;
+            }
+        }
+
+        if (isCurveFire)
+        {
+            if (leftFire)
+            {
+                GameObject bullet = Instantiate(curveBulletObject);
+                bullet.transform.position = bulletFireLeftObject.transform.position;
+                leftFire = false;
+            }
+            else
+            {
+                GameObject bullet = Instantiate(curveBulletObject);
+                bullet.transform.position = bulletFireRightObject.transform.position;
+                bullet.GetComponent<CurveBulletController>().isLeftFire = false;
                 leftFire = true;
             }
         }
