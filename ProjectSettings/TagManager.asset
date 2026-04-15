@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Bullet
   - Monster
+  - ScoreManager
+  - HowToPlay
+  - BottomCutLine
   layers:
   - Default
   - TransparentFX

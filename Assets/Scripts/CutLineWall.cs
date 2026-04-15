@@ -1,28 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CutLineWall : MonoBehaviour
 {
     public GameObject targetObject;
     string targetTag;
 
-    // Start is called before the first frame update
     void Start()
     {
         targetTag = targetObject.tag;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == targetTag)
+        if (other.gameObject.CompareTag(targetTag))
         {
+            if (targetTag == "Monster")
+            {
+                ScoreManager.nowScore--;
+            }
             Destroy(other.gameObject);
         }
     }

@@ -5,17 +5,24 @@ using UnityEngine;
 public class Monster: MonoBehaviour
 {
     public float monsterSpd = 3f;
-    Vector3 direct = Vector3.down;
+    private Vector3 direct = Vector3.down;
+    public int monsterHP = 1;
 
     public GameObject prefabsExplosion;
+    public GameObject prefabsHit;
 
-    // Start is called before the first frame update
+    private ScoreManager scoreManager;
+
     void Start()
     {
+        scoreManager = GameObject.FindWithTag("ScoreManager").GetComponent<ScoreManager>();
+
+        monsterHP = Random.Range(1, 7);
+
         int ranNum = Random.Range(0, 10);
         if (ranNum < 3)
         {
-            GameObject target = GameObject.Find("Character");
+            GameObject target = GameObject.FindGameObjectWithTag("Player");
             direct = target.transform.position - transform.position;
             direct.Normalize();
         }
@@ -31,10 +38,33 @@ public class Monster: MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Bullet"))
         {
-            GameObject explosionObj = Instantiate(prefabsExplosion, transform.position, Quaternion.identity);
+            monsterHP -= 1;
+
+            GameObject hitObj = Instantiate(prefabsHit);
+            hitObj.transform.position = collision.contacts[0].point;
 
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+
+            if (monsterHP <= 0)
+            {
+                ScoreManager.nowScore++;
+
+                if (ScoreManager.nowScore > ScoreManager.bestScore)
+                {
+                    ScoreManager.bestScore = ScoreManager.nowScore;
+                    scoreManager.bestScoreUI.text = "BEST SCORE: " + ScoreManager.bestScore;
+                    PlayerPrefs.SetInt("BestScore", ScoreManager.bestScore);
+                }
+
+                GameObject explosionObj = Instantiate(prefabsExplosion);
+                explosionObj.transform.position = transform.position;
+
+                Destroy(gameObject);
+            }
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            PlayManager.isGameOver = true;
         }
     }
 }
